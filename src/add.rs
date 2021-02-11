@@ -11,7 +11,7 @@ pub fn add(src: &str, dest: &str) -> Result<()> {
 
     let mut dotfiles = OpenOptions::new().append(true).open(dotfiles_path)?;
 
-    dotfiles.write_all(format!("{}->{}\r\n", src, dest).as_bytes())?;
+    dotfiles.write_all(format!("{}->{}\r\n", src, format!("{}/.dotfiles/{}", env::var("HOME")?, dest)).as_bytes())?;
     println!("Successfully added `{}` to dotfiles as `{}`", src, dest);
 
     Ok(())

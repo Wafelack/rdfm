@@ -1,6 +1,8 @@
+mod proceed;
 mod add;
 mod setup;
 use add::{add, remove};
+use proceed::proceed;
 use setup::*;
 
 use std::{env, fmt::{Debug, Formatter, Result as fmtRes}};
@@ -35,6 +37,7 @@ fn main() -> Result<()> {
                 error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
             )
         }
+        "proceed" => proceed(),
         _ => Err(
             error!("Invalid command, type `dtm help` for help")
         )
@@ -62,7 +65,7 @@ fn help() -> Result<()> {
     println!("\thelp               \tDisplays this message.");
     println!("\tversion            \tDisplays version information.");
     println!("\tsetup              \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
-    println!("\tadd-elem $src $dest\tAdds an element to the dotfiles.");
+    println!("\tadd-elem $src $dest\tAdds $dest pointing to $src to the dotfiles.");
     println!("\trem-elem $entry    \tRemoves all lines containing $entry.");
 
     println!();
@@ -84,6 +87,12 @@ impl From<env::VarError> for DtmError {
         error!("environment variable `HOME` not found.") 
         // I hardcode the variable name because it is the only time
         // I'll use env::var, I'll adjust if necesary.
+    }
+}
+
+impl From<fs_extra::error::Error> for DtmError {
+    fn from(e: fs_extra::error::Error) -> Self {
+        error!(e)
     }
 }
 
