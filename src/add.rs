@@ -1,6 +1,6 @@
 use std::{env, fs::{self, OpenOptions}, io::Write};
 
-use fs::{File, read_to_string};
+use fs::File;
 
 use crate::{Result, setup::setup};
 

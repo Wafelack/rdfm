@@ -67,6 +67,7 @@ fn help() -> Result<()> {
     println!("\tsetup              \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
     println!("\tadd-elem $src $dest\tAdds $dest pointing to $src to the dotfiles.");
     println!("\trem-elem $entry    \tRemoves all lines containing $entry.");
+    println!("\tproceed            \tProceeds all the file copies in ~/.dotfiles/.");
 
     println!();
     Ok(())
