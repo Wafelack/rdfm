@@ -26,8 +26,42 @@ an easy and reliable way to manage and share dotfiles.
 
 # Getting Started
 
-- To setup a dotfiles environment, run `rdfm setup`.
-- To get help about RDFM commands, run `rdfm help`.
+## Setting up rdfm
+
+RDFM can be set up with the command `rdfm setup`, that will create a `~/.dotfiles/` directory and a `~/.dotfiles/dotfiles.rdfm` file.
+
+## Adding dotfiles
+
+You can add dotfiles to the `~/.dotfiles/dotfiles.rdfm` file with the `rdfm add $src $dest` command
+that can be used as following:
+
+```bash
+$ rdfm add ~/.vim/ vim/.vim
+Successfully added `/home/wafelack/.vim/` to dotfiles as `vim/.vim`
+$ cat ~/.dotfiles/dotfiles.rdfm
+# This file is created by rdfm and is not intended for manual editing.
+/home/wafelack/.vim/->/home/wafelack/.dotfiles/vim/.vim
+$
+```
+
+## Removing dotfiles
+
+To remove dotfiles from `~/.dotfiles/dotfiles.rdfm`, you can use the `rdfm remove $pattern` command
+that will remove every line containing one or more occurences of `$pattern`.
+
+## Proceeding linking
+
+To proceed linking and copy your dotfiles to the `~/.dotfiles` folder, you'll use the `rdfm proceed` command.
+
+## Pulling dotfiles
+
+To pull dotfiles from an external repo, you can use `rdfm pull $repo` as following:
+
+```bash
+$ rdfm pull https://github.com/wafelack/dotfiles
+Successfully pulled `https://github.com/wafelack/dotfiles` into `~/.dotfiles`
+$
+```
 
 # Contributing
 
@@ -39,7 +73,7 @@ an easy and reliable way to manage and share dotfiles.
 
 # Legal
 
-RDFM is distributed under the GNU Affero General Public License version 3.0 (AGPL-3.0) as described in the [LICENSE](./LICENSE)
+RDFM is distributed under the GNU Affero General Public License version 3.0 (AGPL-3.0) as described in the [LICENSE](./LICENSE) file.
 
 # Build from source
 
