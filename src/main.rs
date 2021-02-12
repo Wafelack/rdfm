@@ -1,70 +1,62 @@
-mod pull;
-mod proceed;
 mod add;
+mod proceed;
+mod pull;
 mod setup;
 use add::{add, remove};
 use proceed::proceed;
-use setup::*;
 use pull::pull;
+use setup::*;
 mod errors;
 pub use errors::{DtmError, Result};
-
-
 
 fn main() -> Result<()> {
     let args = std::env::args().skip(1).collect::<Vec<_>>();
 
     if args.len() < 1 {
-        return Err(
-            error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
-        )
+        return Err(error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]"));
     }
 
     match args[0].as_str() {
         "setup" => setup(),
         "help" | "-h" | "--help" => help(),
         "version" | "-v" | "--version" => {
-            println!("{} {}", env!("CARGO_PKG_NAME"),env!("CARGO_PKG_VERSION")); 
+            println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
             Ok(())
-        },
-        "add" => if args.len() == 3 {
-            add(&args[1], &args[2])
-        } else {
-            Err(
-                error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
-            )
         }
-        "remove" => if args.len() == 2 {
-            remove(&args[1])
-        } else {
-            Err(
-                error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
-            )
+        "add" => {
+            if args.len() == 3 {
+                add(&args[1], &args[2])
+            } else {
+                Err(error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]"))
+            }
         }
-        "pull" => if args.len() == 2 {
-            pull(&args[1])
-        } else {
-            Err(
-                error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
-            )
+        "remove" => {
+            if args.len() == 2 {
+                remove(&args[1])
+            } else {
+                Err(error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]"))
+            }
+        }
+        "pull" => {
+            if args.len() == 2 {
+                pull(&args[1])
+            } else {
+                Err(error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]"))
+            }
         }
         "proceed" => proceed(),
-        _ => Err(
-            error!("Invalid command, type `dtm help` for help")
-        )
+        _ => Err(error!("Invalid command, type `dtm help` for help")),
     }
-
 }
 
 fn help() -> Result<()> {
-    
     println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
     println!("{}", env!("CARGO_PKG_AUTHORS"));
     println!("{}", env!("CARGO_PKG_DESCRIPTION"));
-    
+
     // Usage
     println!("\nUSAGE:");
-    println!("\n{} <COMMAND> [OPTIONS]",env!("CARGO_PKG_NAME"));
+    println!("\n{} <COMMAND> [OPTIONS]", env!("CARGO_PKG_NAME"));
 
     // Flags
     println!("\nFLAGS:");

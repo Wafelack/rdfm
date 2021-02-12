@@ -1,4 +1,7 @@
-use std::{env, fmt::{Debug, Formatter, Result as fmtRes}};
+use std::{
+    env,
+    fmt::{Debug, Formatter, Result as fmtRes},
+};
 
 #[macro_export]
 macro_rules! error {
@@ -21,7 +24,7 @@ impl Debug for DtmError {
 
 impl From<env::VarError> for DtmError {
     fn from(_: env::VarError) -> Self {
-        error!("environment variable `HOME` not found.") 
+        error!("environment variable `HOME` not found.")
         // I hardcode the variable name because it is the only time
         // I'll use env::var, I'll adjust if necesary.
     }
@@ -34,7 +37,7 @@ impl From<fs_extra::error::Error> for DtmError {
 
 impl From<std::io::Error> for DtmError {
     fn from(e: std::io::Error) -> Self {
-        error!(e) 
+        error!(e)
         // I hardcode the variable name because it is the only time
         // I'll use env::var, I'll adjust if necesary.
     }

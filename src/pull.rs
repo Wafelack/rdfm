@@ -1,6 +1,6 @@
-use std::{env, fs, path::Path};
-use crate::{Result};
+use crate::Result;
 use git2::Repository;
+use std::{env, fs, path::Path};
 
 pub fn pull(repo: &str) -> Result<()> {
     let dotfiles_folder = &format!("{}/.dotfiles/", env::var("HOME")?);

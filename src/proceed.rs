@@ -1,12 +1,13 @@
-use fs::{File};
-use fs_extra::{dir::{remove},dir, file};
+use fs::File;
+use fs_extra::{dir, dir::remove, file};
 
-use crate::{Result, setup::setup, error, DtmError};
+use crate::{error, setup::setup, DtmError, Result};
 use std::{env, ffi::OsStr, fs, io::Read, path::Path};
 
 fn same<T>(a: T, b: T) -> Result<bool>
-where T: AsRef<Path> + AsRef<OsStr> {
-
+where
+    T: AsRef<Path> + AsRef<OsStr>,
+{
     let a_path = Path::new(&a);
     let b_path = Path::new(&b);
 
@@ -16,7 +17,6 @@ where T: AsRef<Path> + AsRef<OsStr> {
 
     if a_path.is_dir() {
         if b_path.is_dir() {
-
             let mut a_entries = vec![];
 
             for entry in fs::read_dir(a_path)? {
@@ -41,7 +41,6 @@ where T: AsRef<Path> + AsRef<OsStr> {
                 }
             }
 
-
             Ok(true)
         } else {
             Ok(false)
@@ -49,8 +48,7 @@ where T: AsRef<Path> + AsRef<OsStr> {
     } else {
         if b_path.is_dir() {
             Ok(false)
-        } else{
-
+        } else {
             let mut a_bytes = vec![];
             let mut b_bytes = vec![];
 
@@ -71,24 +69,35 @@ pub fn proceed() -> Result<()> {
     setup()?;
 
     let content = fs::read_to_string(dotfiles_path)?;
-    let len = content.lines().filter(|l| !l.starts_with("#")).collect::<Vec<_>>().len();
+    let len = content
+        .lines()
+        .filter(|l| !l.starts_with("#"))
+        .collect::<Vec<_>>()
+        .len();
 
     println!("\x1b[0;32mLinking\x1b[0m {} files...", len);
     for (index, line) in content.lines().enumerate() {
-        
         if line.starts_with("#") {
             continue;
         }
         let splited = line.split("->").collect::<Vec<_>>();
-    
+
         if splited.len() != 2 {
-            return Err(
-                error!((format!("Invalid line format in ~/.dotfiles/dotfiles.dtm at line {} ({}).", index + 1, line)))
-            )
+            return Err(error!(
+                (format!(
+                    "Invalid line format in ~/.dotfiles/dotfiles.dtm at line {} ({}).",
+                    index + 1,
+                    line
+                ))
+            ));
         }
 
         if same(splited[0], splited[1])? {
-            println!("`{}`->`{}`... \x1b[1;33mnot updated\x1b[0m", splited[0].replace(&env::var("HOME")?, "~"), splited[1].replace(&env::var("HOME")?, "~"));
+            println!(
+                "`{}`->`{}`... \x1b[1;33mnot updated\x1b[0m",
+                splited[0].replace(&env::var("HOME")?, "~"),
+                splited[1].replace(&env::var("HOME")?, "~")
+            );
             continue;
         }
 
@@ -107,18 +116,20 @@ pub fn proceed() -> Result<()> {
             if src.is_dir() {
                 fs::create_dir_all(dest)?;
                 dir::copy(src, dest, &dir::CopyOptions::new())?;
-                
             } else {
                 fs::create_dir_all(dest.parent().unwrap())?;
                 file::copy(src, dest, &file::CopyOptions::new())?;
             }
         } else {
-            return Err(
-                error!((format!("No filesystem element named `{}`", dest.to_str().unwrap())))
-            )
+            return Err(error!(
+                (format!("No filesystem element named `{}`", dest.to_str().unwrap()))
+            ));
         }
-        println!("`{}`->`{}`... \x1b[0;31mnok\x1b[0m", splited[0].replace(&env::var("HOME")?, "~"), splited[1].replace(&env::var("HOME")?, "~"));
-        
+        println!(
+            "`{}`->`{}`... \x1b[0;31mnok\x1b[0m",
+            splited[0].replace(&env::var("HOME")?, "~"),
+            splited[1].replace(&env::var("HOME")?, "~")
+        );
     }
     println!("\x1b[0;32mSuccessfully\x1b[0m linked {} files.", len);
 
