@@ -126,7 +126,7 @@ pub fn proceed() -> Result<()> {
             ));
         }
         println!(
-            "`{}`->`{}`... \x1b[0;31mnok\x1b[0m",
+            "`{}`->`{}`... \x1b[0;32mok\x1b[0m",
             splited[0].replace(&env::var("HOME")?, "~"),
             splited[1].replace(&env::var("HOME")?, "~")
         );

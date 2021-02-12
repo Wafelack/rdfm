@@ -11,3 +11,9 @@ This is the RDFM changelog, all major changes will be depicted here.
 - `rdfm proceed` to proceed all the linking.
 - `rdfm remove $pattern` to remove all lines of `~/.dotfiles/dotfiles.rdfm` containing this pattern.
 - `rdfm pull` to pull dotfiles from an external git repo.
+
+# 0.1.1 | ?
+
+## Fixed
+
+- Message display in proceed (displaying `nok` in red instead of `ok` in green).
