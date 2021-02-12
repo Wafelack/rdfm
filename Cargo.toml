@@ -1,8 +1,9 @@
 [package]
-name = "dtm"
+name = "rdfm"
 version = "0.1.0"
 authors = ["Wafelack <wafelack@protonmail.com>"]
 edition = "2018"
+description = "RDFM - A Rusty DotFiles Manager"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

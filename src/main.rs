@@ -22,7 +22,7 @@ fn main() -> Result<()> {
         "setup" => setup(),
         "help" | "-h" | "--help" => help(),
         "version" | "-v" | "--version" => {
-            println!("DTM {}", env!("CARGO_PKG_VERSION")); 
+            println!("{} {}", env!("CARGO_PKG_NAME"),env!("CARGO_PKG_VERSION")); 
             Ok(())
         },
         "add" => if args.len() == 3 {
@@ -56,13 +56,13 @@ fn main() -> Result<()> {
 
 fn help() -> Result<()> {
     
-    println!("dtm {}", env!("CARGO_PKG_VERSION"));
+    println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
     println!("{}", env!("CARGO_PKG_AUTHORS"));
-    println!("dtm is yet another dotfiles manager");
+    println!("{}", env!("CARGO_PKG_DESCRIPTION"));
     
     // Usage
     println!("\nUSAGE:");
-    println!("\tdtm <COMMAND> [OPTIONS]");
+    println!("\n{} <COMMAND> [OPTIONS]",env!("CARGO_PKG_NAME"));
 
     // Flags
     println!("\nFLAGS:");
@@ -76,7 +76,7 @@ fn help() -> Result<()> {
     println!("\tsetup          \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
     println!("\tadd $src $dest \tAdds $dest pointing to $src to the dotfiles.");
     println!("\tremove $entry  \tRemoves all lines containing $entry.");
-    println!("\tproceed        \tProceeds all the file copies in ~/.dotfiles/.");
+    println!("\tproceed        \tLinks the files into ~/.dotfiles/.");
     println!("\tpull $repo_link\tPulls the specified repo to ~/.dotfiles/.");
 
     println!();
