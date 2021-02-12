@@ -1,9 +1,11 @@
+mod pull;
 mod proceed;
 mod add;
 mod setup;
 use add::{add, remove};
 use proceed::proceed;
 use setup::*;
+use pull::pull;
 
 use std::{env, fmt::{Debug, Formatter, Result as fmtRes}};
 
@@ -23,15 +25,22 @@ fn main() -> Result<()> {
             println!("DTM {}", env!("CARGO_PKG_VERSION")); 
             Ok(())
         },
-        "add-elem" => if args.len() == 3 {
+        "add" => if args.len() == 3 {
             add(&args[1], &args[2])
         } else {
             Err(
                 error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
             )
         }
-        "rem-elem" => if args.len() == 2 {
+        "remove" => if args.len() == 2 {
             remove(&args[1])
+        } else {
+            Err(
+                error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
+            )
+        }
+        "pull" => if args.len() == 2 {
+            pull(&args[1])
         } else {
             Err(
                 error!("Invalid arguments. Usage: dtm <COMMAND> [OPTIONS]")
@@ -62,12 +71,12 @@ fn help() -> Result<()> {
 
     // Commands
     println!("\nCOMMANDS:");
-    println!("\thelp               \tDisplays this message.");
-    println!("\tversion            \tDisplays version information.");
-    println!("\tsetup              \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
-    println!("\tadd-elem $src $dest\tAdds $dest pointing to $src to the dotfiles.");
-    println!("\trem-elem $entry    \tRemoves all lines containing $entry.");
-    println!("\tproceed            \tProceeds all the file copies in ~/.dotfiles/.");
+    println!("\thelp          \tDisplays this message.");
+    println!("\tversion       \tDisplays version information.");
+    println!("\tsetup         \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
+    println!("\tadd $src $dest\tAdds $dest pointing to $src to the dotfiles.");
+    println!("\tremove $entry \tRemoves all lines containing $entry.");
+    println!("\tproceed       \tProceeds all the file copies in ~/.dotfiles/.");
 
     println!();
     Ok(())
@@ -90,7 +99,6 @@ impl From<env::VarError> for DtmError {
         // I'll use env::var, I'll adjust if necesary.
     }
 }
-
 impl From<fs_extra::error::Error> for DtmError {
     fn from(e: fs_extra::error::Error) -> Self {
         error!(e)
@@ -102,6 +110,12 @@ impl From<std::io::Error> for DtmError {
         error!(e) 
         // I hardcode the variable name because it is the only time
         // I'll use env::var, I'll adjust if necesary.
+    }
+}
+
+impl From<git2::Error> for DtmError {
+    fn from(e: git2::Error) -> Self {
+        error!(e)
     }
 }
 
