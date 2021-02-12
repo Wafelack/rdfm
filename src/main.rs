@@ -67,7 +67,7 @@ fn help() -> Result<()> {
     println!("\nCOMMANDS:");
     println!("\thelp           \tDisplays this message.");
     println!("\tversion        \tDisplays version information.");
-    println!("\tsetup          \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
+    println!("\tsetup          \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.rdfm).");
     println!("\tadd $src $dest \tAdds $dest pointing to $src to the dotfiles.");
     println!("\tremove $entry  \tRemoves all lines containing $entry.");
     println!("\tproceed        \tLinks the files into ~/.dotfiles/.");

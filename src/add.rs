@@ -9,7 +9,7 @@ use fs::File;
 use crate::{setup::setup, Result};
 
 pub fn add(src: &str, dest: &str) -> Result<()> {
-    let dotfiles_path = format!("{}/.dotfiles/dotfiles.dtm", env::var("HOME")?);
+    let dotfiles_path = format!("{}/.dotfiles/dotfiles.rdfm", env::var("HOME")?);
 
     setup()?;
 
@@ -29,7 +29,7 @@ pub fn add(src: &str, dest: &str) -> Result<()> {
 }
 
 pub fn remove(value: &str) -> Result<()> {
-    let dotfiles_path = format!("{}/.dotfiles/dotfiles.dtm", env::var("HOME")?);
+    let dotfiles_path = format!("{}/.dotfiles/dotfiles.rdfm", env::var("HOME")?);
 
     setup()?;
 

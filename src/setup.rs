@@ -12,10 +12,10 @@ pub fn setup() -> Result<()> {
         fs::create_dir(&folder)?;
     }
 
-    if !Path::new(&format!("{}/dotfiles.dtm", folder)).exists() {
-        let mut f = File::create(&format!("{}/dotfiles.dtm", folder))?;
+    if !Path::new(&format!("{}/dotfiles.rdfm", folder)).exists() {
+        let mut f = File::create(&format!("{}/dotfiles.rdfm", folder))?;
         f.write_all(
-            "# This file is created by dtm and is not intended for manual editing.\r\n".as_bytes(),
+            "# This file is created by rdfm and is not intended for manual editing.\r\n".as_bytes(),
         )?;
     }
 

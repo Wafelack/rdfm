@@ -64,7 +64,7 @@ where
 }
 
 pub fn proceed() -> Result<()> {
-    let dotfiles_path = format!("{}/.dotfiles/dotfiles.dtm", env::var("HOME")?);
+    let dotfiles_path = format!("{}/.dotfiles/dotfiles.rdfm", env::var("HOME")?);
 
     setup()?;
 
@@ -85,7 +85,7 @@ pub fn proceed() -> Result<()> {
         if splited.len() != 2 {
             return Err(error!(
                 (format!(
-                    "Invalid line format in ~/.dotfiles/dotfiles.dtm at line {} ({}).",
+                    "Invalid line format in ~/.dotfiles/dotfiles.rdfm at line {} ({}).",
                     index + 1,
                     line
                 ))
