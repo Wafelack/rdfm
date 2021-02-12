@@ -1,6 +1,5 @@
 use fs::{File};
 use fs_extra::{dir::{remove},dir, file};
-use sha2::{Digest, Sha256};
 
 use crate::{Result, setup::setup, error, DtmError};
 use std::{env, ffi::OsStr, fs, io::Read, path::Path};
@@ -61,16 +60,7 @@ where T: AsRef<Path> + AsRef<OsStr> {
             a_file.read_to_end(&mut a_bytes)?;
             b_file.read_to_end(&mut b_bytes)?;
 
-            let mut a_hasher = Sha256::new();
-            let mut b_hasher = Sha256::new();
-
-            a_hasher.update(&a_bytes);
-            b_hasher.update(&b_bytes);
-
-            let a_result = a_hasher.finalize();
-            let b_result = b_hasher.finalize();
-
-            Ok(a_result[..] == b_result[..])
+            Ok(a_bytes == b_bytes)
         }
     }
 }

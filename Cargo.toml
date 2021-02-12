@@ -10,4 +10,3 @@ description = "RDFM - A Rusty DotFiles Manager"
 [dependencies]
 fs_extra  = "1.2.0"
 git2      = "0.13.17"
-sha2      = "0.9.3"
