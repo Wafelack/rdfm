@@ -1,7 +1,7 @@
 use fs::File;
 use fs_extra::{dir, dir::remove, file};
 
-use crate::{error, setup::setup, DtmError, Result};
+use crate::{error, setup::setup, RdfmError, Result};
 use std::{env, ffi::OsStr, fs, io::Read, path::Path};
 
 fn same<T>(a: T, b: T) -> Result<bool>

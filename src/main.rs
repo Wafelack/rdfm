@@ -7,7 +7,7 @@ use proceed::proceed;
 use pull::pull;
 use setup::*;
 mod errors;
-pub use errors::{DtmError, Result};
+pub use errors::{RdfmError, Result};
 
 fn main() -> Result<()> {
     let args = std::env::args().skip(1).collect::<Vec<_>>();
