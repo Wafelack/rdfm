@@ -71,12 +71,13 @@ fn help() -> Result<()> {
 
     // Commands
     println!("\nCOMMANDS:");
-    println!("\thelp          \tDisplays this message.");
-    println!("\tversion       \tDisplays version information.");
-    println!("\tsetup         \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
-    println!("\tadd $src $dest\tAdds $dest pointing to $src to the dotfiles.");
-    println!("\tremove $entry \tRemoves all lines containing $entry.");
-    println!("\tproceed       \tProceeds all the file copies in ~/.dotfiles/.");
+    println!("\thelp           \tDisplays this message.");
+    println!("\tversion        \tDisplays version information.");
+    println!("\tsetup          \tSetups dtm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.dtm).");
+    println!("\tadd $src $dest \tAdds $dest pointing to $src to the dotfiles.");
+    println!("\tremove $entry  \tRemoves all lines containing $entry.");
+    println!("\tproceed        \tProceeds all the file copies in ~/.dotfiles/.");
+    println!("\tpull $repo_link\tPulls the specified repo to ~/.dotfiles/.");
 
     println!();
     Ok(())
