@@ -20,9 +20,9 @@ an easy and reliable way to manage and share dotfiles.
 
 - To install RDFM you can either:
 
-1. Run `cargo install rdfm`
-2. Download the latest binary from [the releases page](https://github.com/wafelack/rdfm/releases)
-3. [Build the project from source](#build-from-source)
+1. **Recommended** [Build the project from source](#build-from-source)
+2. Run `cargo install rdfm`
+3. Download the latest binary from [the releases page](https://github.com/wafelack/rdfm/releases)
 
 # Getting Started
 
