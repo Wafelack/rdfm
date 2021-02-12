@@ -39,7 +39,7 @@ pub fn remove(value: &str) -> Result<()> {
     content = content
         .lines()
         .filter(|l| !l.contains(value))
-        .collect::<String>();
+        .collect::<Vec<&str>>().join("\r\n");
 
     dotfiles.write_all(content.as_bytes())?;
 
