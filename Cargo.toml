@@ -4,6 +4,9 @@ version = "0.1.0"
 authors = ["Wafelack <wafelack@protonmail.com>"]
 edition = "2018"
 description = "RDFM - A Rusty DotFiles Manager"
+license = "AGPL-3.0"
+repository = "https://github.com/wafelack/rdfm"
+readme = "README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
