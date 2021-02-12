@@ -77,7 +77,6 @@ RDFM is distributed under the GNU Affero General Public License version 3.0 (AGP
 
 # Build from source
 
-- Run `wget https://github.com/upx/upx/archive/$VERSION.tar.gz`.
-- Extract it via `tar -xzf $VERSION.tar.gz`.
-- `cd` in the produced directory and run `cargo build --release`.
+- Clone the project: `git clone git@github.com:Wafelack/rdfm.git`.
+- `cd` in `rdfm/` and run `cargo build --release`.
 - Add the produced binary somewhere in your $PATH.
