@@ -12,15 +12,9 @@
 
 # Introduction
 
-Welcome to RDFM.
-
-RDFM is the Rusty DotFiles Manager, it permits an efficient and easy dotfiles sharing.
-
-It has only been tested on a GNU system but it should work on every UNIX based OS.
-
-**Dont forget to read the LICENSE file** - RDFM is distributed under the GNU Affero General Public License (AGPL).
-
-The informations about latest changes can be found in the CHANGELOG.md file.
+RDFM is the Rusty DotFiles Manager, based on a homemade linking system
+and configured by a simple file ; it is intended for everyone who needs
+an easy and reliable way to manage and share dotfiles.
 
 # Installation
 
@@ -42,6 +36,10 @@ The informations about latest changes can be found in the CHANGELOG.md file.
   2. Follow the commit rule, [gitmoji.dev](https://gitmoji.dev) or at least [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/).
   3. Use [semantic versioning](https://semver.org)
   4. All submited code has to be working.
+
+# Legal
+
+RDFM is distributed under the GNU Affero General Public License version 3.0 (AGPL-3.0) as described in the [LICENSE](./LICENSE)
 
 # Build from source
 
