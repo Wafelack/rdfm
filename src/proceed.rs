@@ -1,7 +1,11 @@
 use fs::File;
 use fs_extra::{dir, dir::remove, file};
 
-use crate::{RdfmError, Result, error, setup::{get_dotfiles_folder, setup}};
+use crate::{
+    error,
+    setup::{get_dotfiles_folder, setup},
+    RdfmError, Result,
+};
 use std::{env, ffi::OsStr, fs, io::Read, path::Path};
 
 fn same<T>(a: T, b: T) -> Result<bool>

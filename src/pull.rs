@@ -1,6 +1,6 @@
-use crate::{Result, setup::get_dotfiles_folder};
+use crate::{setup::get_dotfiles_folder, Result};
 use git2::Repository;
-use std::{env, fs, path::Path};
+use std::{fs, path::Path};
 
 pub fn pull(repo: &str) -> Result<()> {
     let dotfiles_folder = &get_dotfiles_folder()?;

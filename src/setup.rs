@@ -1,6 +1,5 @@
-use env::var;
+use crate::Result;
 use fs::File;
-use crate::{Result};
 use std::env;
 use std::{fs, io::Write, path::Path};
 

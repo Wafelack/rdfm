@@ -25,7 +25,9 @@ fn main() -> Result<()> {
         }
         "add" => {
             if args.len() == 3 {
-                add(&args[1], &args[2])
+                add(&args[1], Some(&args[2]))
+            } else if args.len() == 2 {
+                add(&args[1], None)
             } else {
                 Err(error!("Invalid arguments. Usage: rdfm <COMMAND> [OPTIONS]"))
             }
@@ -67,7 +69,9 @@ fn help() -> Result<()> {
     println!("\nCOMMANDS:");
     println!("\thelp           \tDisplays this message.");
     println!("\tversion        \tDisplays version information.");
-    println!("\tsetup          \tSetups rdfm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.rdfm).");
+    println!(
+        "\tsetup          \tSetups rdfm (creating ~/.dotfiles and ~/.dotfiles/dotfiles.rdfm)."
+    );
     println!("\tadd $src $dest \tAdds $dest pointing to $src to the dotfiles.");
     println!("\tremove $entry  \tRemoves all lines containing $entry.");
     println!("\tproceed        \tLinks the files into ~/.dotfiles/.");
