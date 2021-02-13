@@ -17,3 +17,8 @@ This is the RDFM changelog, all major changes will be depicted here.
 ## Fixed
 
 - Message display in proceed (displaying `nok` in red instead of `ok` in green).
+
+## Added
+
+- XDG Base Folder detection for setup
+- Default target name if only one argument is supplied.
