@@ -1,12 +1,11 @@
+use env::var;
 use fs::File;
-
-use crate::Result;
+use crate::{Result};
 use std::env;
 use std::{fs, io::Write, path::Path};
 
 pub fn setup() -> Result<()> {
-    let home = env::var("HOME")?;
-    let folder = format!("{}/.dotfiles", home);
+    let folder = get_dotfiles_folder()?;
 
     if !Path::new(&folder).exists() {
         fs::create_dir(&folder)?;
@@ -20,4 +19,13 @@ pub fn setup() -> Result<()> {
     }
 
     Ok(())
+}
+
+pub fn get_dotfiles_folder() -> Result<String> {
+    if env::var("XDG_CONFIG_HOME").is_ok() {
+        println!("Using $XDG_CONFIG_HOME instead of $HOME/.dotfiles/ for dotfiles initialization.");
+        Ok(format!("{}", env::var("XDG_CONFIG_HOME")?))
+    } else {
+        Ok(format!("{}/.dotfiles", env::var("HOME")?))
+    }
 }

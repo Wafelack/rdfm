@@ -1,9 +1,9 @@
-use crate::Result;
+use crate::{Result, setup::get_dotfiles_folder};
 use git2::Repository;
 use std::{env, fs, path::Path};
 
 pub fn pull(repo: &str) -> Result<()> {
-    let dotfiles_folder = &format!("{}/.dotfiles/", env::var("HOME")?);
+    let dotfiles_folder = &get_dotfiles_folder()?;
 
     if Path::new(dotfiles_folder).exists() {
         fs::remove_dir_all(dotfiles_folder)?;

@@ -1,7 +1,7 @@
 use fs::File;
 use fs_extra::{dir, dir::remove, file};
 
-use crate::{error, setup::setup, RdfmError, Result};
+use crate::{RdfmError, Result, error, setup::{get_dotfiles_folder, setup}};
 use std::{env, ffi::OsStr, fs, io::Read, path::Path};
 
 fn same<T>(a: T, b: T) -> Result<bool>
@@ -64,7 +64,7 @@ where
 }
 
 pub fn proceed() -> Result<()> {
-    let dotfiles_path = format!("{}/.dotfiles/dotfiles.rdfm", env::var("HOME")?);
+    let dotfiles_path = format!("{}/dotfiles.rdfm", get_dotfiles_folder()?);
 
     setup()?;
 
@@ -85,7 +85,8 @@ pub fn proceed() -> Result<()> {
         if splited.len() != 2 {
             return Err(error!(
                 (format!(
-                    "Invalid line format in ~/.dotfiles/dotfiles.rdfm at line {} ({}).",
+                    "Invalid line format in {}/dotfiles.rdfm at line {} ({}).",
+                    get_dotfiles_folder()?,
                     index + 1,
                     line
                 ))

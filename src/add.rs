@@ -6,10 +6,10 @@ use std::{
 
 use fs::File;
 
-use crate::{setup::setup, Result};
+use crate::{Result, setup::{get_dotfiles_folder, setup}};
 
 pub fn add(src: &str, dest: &str) -> Result<()> {
-    let dotfiles_path = format!("{}/.dotfiles/dotfiles.rdfm", env::var("HOME")?);
+    let dotfiles_path = format!("{}/dotfiles.rdfm", get_dotfiles_folder()?);
 
     setup()?;
 
@@ -29,7 +29,7 @@ pub fn add(src: &str, dest: &str) -> Result<()> {
 }
 
 pub fn remove(value: &str) -> Result<()> {
-    let dotfiles_path = format!("{}/.dotfiles/dotfiles.rdfm", env::var("HOME")?);
+    let dotfiles_path = format!("{}/dotfiles.rdfm", get_dotfiles_folder()?);
 
     setup()?;
 
