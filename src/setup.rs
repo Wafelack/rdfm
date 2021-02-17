@@ -23,7 +23,7 @@ pub fn setup() -> Result<()> {
 pub fn get_dotfiles_folder() -> Result<String> {
     if env::var("XDG_CONFIG_HOME").is_ok() {
         println!("Using $XDG_CONFIG_HOME instead of $HOME/.dotfiles/ for dotfiles initialization.");
-        Ok(format!("{}", env::var("XDG_CONFIG_HOME")?))
+        Ok(format!("{}/.dotfiles", env::var("XDG_CONFIG_HOME")?))
     } else {
         Ok(format!("{}/.dotfiles", env::var("HOME")?))
     }

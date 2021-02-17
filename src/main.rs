@@ -3,7 +3,7 @@ mod proceed;
 mod pull;
 mod setup;
 use add::{add, remove};
-use proceed::proceed;
+use proceed::{proceed, rev_proceed};
 use pull::pull;
 use setup::*;
 mod errors;
@@ -46,6 +46,7 @@ fn main() -> Result<()> {
                 Err(error!("Invalid arguments. Usage: rdfm <COMMAND> [OPTIONS]"))
             }
         }
+        "rev-proceed" => rev_proceed(),
         "proceed" => proceed(),
         _ => Err(error!("Invalid command, type `rdfm help` for help")),
     }
@@ -75,6 +76,7 @@ fn help() -> Result<()> {
     println!("\tadd $src $dest \tAdds $dest pointing to $src to the dotfiles.");
     println!("\tremove $entry  \tRemoves all lines containing $entry.");
     println!("\tproceed        \tLinks the files into ~/.dotfiles/.");
+    println!("\trev-proceed    \tReversely links the files from ~/.dotfiles/ to their real path.");
     println!("\tpull $repo_link\tPulls the specified repo to ~/.dotfiles/.");
 
     println!();
