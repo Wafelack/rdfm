@@ -18,10 +18,10 @@ pub fn add(src: &str, dest: Option<&str>) -> Result<()> {
     let mut dotfiles = OpenOptions::new().append(true).open(dotfiles_path)?;
 
     let write_dest = if dest.is_some() {
-        format!("{}{}", get_dotfiles_folder()?, dest.unwrap())
+        format!("{}/{}", get_dotfiles_folder()?, dest.unwrap())
     } else {
         format!(
-            "{}{}",
+            "{}/{}",
             get_dotfiles_folder()?,
             src.replace(&env::var("HOME")?, "")
         )
