@@ -17,6 +17,7 @@ This is the RDFM changelog, all major changes will be depicted here.
 ## Fixed
 
 - Message display in proceed (displaying `nok` in red instead of `ok` in green).
+- Path creation, adding missing `/` that was breaking all.
 
 ## Added
 
