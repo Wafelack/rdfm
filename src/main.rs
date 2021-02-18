@@ -3,7 +3,7 @@ mod proceed;
 mod pull;
 mod setup;
 use add::{add, remove};
-use proceed::{proceed, rev_proceed};
+use proceed::{proceed};
 use pull::pull;
 use setup::*;
 mod errors;
