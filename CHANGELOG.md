@@ -12,7 +12,7 @@ This is the RDFM changelog, all major changes will be depicted here.
 - `rdfm remove $pattern` to remove all lines of `~/.dotfiles/dotfiles.rdfm` containing this pattern.
 - `rdfm pull` to pull dotfiles from an external git repo.
 
-# 0.1.1 | ?
+# 0.1.1 | 18/02/2021
 
 ## Fixed
 

@@ -16,23 +16,37 @@ RDFM is the Rusty DotFiles Manager, based on a homemade linking system
 and configured by a simple file ; it is intended for everyone who needs
 an easy and reliable way to manage and share dotfiles.
 
+# Roadmap
+
+- [x] Dotfiles adding.
+- [x] Dotfiles linking.
+- [x] Setup command.
+- [x] Dotfiles pulling.
+- [x] `XDG_CONFIG_HOME` support.
+- [x] Default target name.
+- [ ] Reverse linking.
+
+
 # Installation
 
 - To install RDFM you can either:
 
 1. **Recommended** [Build the project from source](#build-from-source)
 2. Run `cargo install rdfm`
-3. Download the latest binary from [the releases page](https://github.com/wafelack/rdfm/releases)
+3. Run `bruh install rdfm`
+4. Download the latest binary from [the releases page](https://github.com/wafelack/rdfm/releases)
 
 # Getting Started
 
+In this guide, the `$FOLDER` variable will refer to your `$XDG_CONFIG_HOME` folder if it is set, or `$HOME` if it is not.
+
 ## Setting up rdfm
 
-RDFM can be set up with the command `rdfm setup`, that will create a `~/.dotfiles/` directory and a `~/.dotfiles/dotfiles.rdfm` file.
+RDFM can be set up with the command `rdfm setup`, that will create a `$FOLDER/.dotfiles/` directory and a `$FOLDER/.dotfiles/dotfiles.rdfm` file.
 
 ## Adding dotfiles
 
-You can add dotfiles to the `~/.dotfiles/dotfiles.rdfm` file with the `rdfm add $src $dest` command
+You can add dotfiles to the `$FOLDER/.dotfiles/dotfiles.rdfm` file with the `rdfm add $src $dest` command
 that can be used as following:
 
 ```bash
@@ -46,12 +60,12 @@ $
 
 ## Removing dotfiles
 
-To remove dotfiles from `~/.dotfiles/dotfiles.rdfm`, you can use the `rdfm remove $pattern` command
+To remove dotfiles from `$FOLDER/.dotfiles/dotfiles.rdfm`, you can use the `rdfm remove $pattern` command
 that will remove every line containing one or more occurences of `$pattern`.
 
 ## Proceeding linking
 
-To proceed linking and copy your dotfiles to the `~/.dotfiles` folder, you'll use the `rdfm proceed` command.
+To proceed linking and copy your dotfiles to the `$FOLDER/.dotfiles` folder, you'll use the `rdfm proceed` command.
 
 ## Pulling dotfiles
 
