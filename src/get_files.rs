@@ -19,13 +19,14 @@ pub fn get_files() -> Result<Vec<(String, String)>> {
     let mut to_ret = vec![];
 
     for (idx, line) in content.lines().enumerate() {
-        if line.starts_with("#") {
+        if line.starts_with("#") || line.is_empty() {
             continue;
         }
         let splited = line.split('=').collect::<Vec<_>>();
 
         if splited.len() != 2 {
-            warn!("Invalid syntax at line ", idx, ".");
+            eprintln!("{:?}", splited);
+            warn!("Invalid syntax at line ", (idx + 1), ".");
             continue;
         }
 

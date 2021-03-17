@@ -1,10 +1,13 @@
 use std::{path::Path, fs};
-use crate::{get_files, Result, ok, warn, is_even, copy_dir};
+use crate::{get_files, Result, get_dotfiles_path, ok, warn, is_even, copy_dir};
 
 pub fn link() -> Result<()> {
     let couples = get_files::get_files()?;
 
     for (from, to) in couples {
+
+        let to = format!("{}/{}", get_dotfiles_path(), to);
+
         if is_even(&from, &to)? {
             ok!(from, " and ", to, " won't be updated.")
         } else {

@@ -110,12 +110,12 @@ fn readr<T: AsRef<Path>>(dir: T) -> Result<Vec<String>> {
     Ok(elements)
 }
 
-pub fn copy_dir<T: AsRef<Path> + std::fmt::Display, U: AsRef<Path> + std::fmt::Display>(from: T, to: U) -> Result<()> {
-    if !from.as_ref().exists() {
+pub fn copy_dir(from: &str, to: &str) -> Result<()> {
+    if !Path::new(from).exists() {
         return Err(error(format!("{} not found.", from)));
-    } else if !from.as_ref().is_dir() {
+    } else if !Path::new(from).is_dir() {
         return Err(error(format!("{} is not a directory.", from)));
-    } else if to.as_ref().exists() {
+    } else if Path::new(to).exists() {
         return Err(error(format!("Cannot copy {} into {}: Destination file exists.", from, to)));
     } else {
 
@@ -129,7 +129,12 @@ pub fn copy_dir<T: AsRef<Path> + std::fmt::Display, U: AsRef<Path> + std::fmt::D
         env::set_current_dir(to)?;
 
         for element in content {
-            let stringified = format!("{}/{}/{}", &current.to_str().unwrap(), from, &element);
+            let stringified = if !Path::new(&from).is_absolute() {
+                format!("{}/{}/{}", &current.to_str().unwrap(), from, &element)
+            } else {
+                format!("{}/{}", from, &element)
+            };
+
 
             if Path::new(&stringified).is_dir() {
                 fs::create_dir_all(&element)?;
