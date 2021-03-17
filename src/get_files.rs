@@ -19,6 +19,9 @@ pub fn get_files() -> Result<Vec<(String, String)>> {
     let mut to_ret = vec![];
 
     for (idx, line) in content.lines().enumerate() {
+        if line.starts_with("#") {
+            continue;
+        }
         let splited = line.split('=').collect::<Vec<_>>();
 
         if splited.len() != 2 {
