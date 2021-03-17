@@ -1,5 +1,5 @@
 use std::{path::Path, fs};
-use crate::*;
+use crate::{get_files, Result, ok, warn, is_even, copy_dir};
 
 pub fn link() -> Result<()> {
     let couples = get_files::get_files()?;

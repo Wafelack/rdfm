@@ -146,6 +146,6 @@ pub fn copy_dir<T: AsRef<Path> + std::fmt::Display, U: AsRef<Path> + std::fmt::D
     }
 }
 
-mod get_files;
-mod link;
-mod setup;
+pub mod get_files;
+pub mod link;
+pub mod setup;

@@ -1,4 +1,4 @@
-use crate::*;
+use crate::{get_dotfiles_path, Result};
 use std::{fs, path::Path};
 
 pub fn setup() -> Result<()> {
