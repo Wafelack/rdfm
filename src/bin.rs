@@ -1,5 +1,3 @@
 use rdfm_lib::*;
 
-fn main() {
-
-}
+fn main() {}

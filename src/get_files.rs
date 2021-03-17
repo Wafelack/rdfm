@@ -2,13 +2,12 @@ use crate::*;
 use std::{fs, path::Path};
 
 pub fn get_files() -> Result<Vec<(String, String)>> {
-
     let path = get_dotfiles_path();
 
     if !Path::new(&path).exists() {
         return Err(error("Dotfiles folder is not initialized."));
     }
-    
+
     let file_path = format!("{}/dotfiles.rdfm", &path);
 
     if !Path::new(&file_path).exists() {
@@ -23,8 +22,8 @@ pub fn get_files() -> Result<Vec<(String, String)>> {
         let splited = line.split('=').collect::<Vec<_>>();
 
         if splited.len() != 2 {
-           warn!("Invalid syntax at line ", idx, ".");
-           continue;
+            warn!("Invalid syntax at line ", idx, ".");
+            continue;
         }
 
         let from = splited[0].trim().to_string();
@@ -32,7 +31,6 @@ pub fn get_files() -> Result<Vec<(String, String)>> {
 
         to_ret.push((from, to));
     }
-    
 
     Ok(to_ret)
 }
