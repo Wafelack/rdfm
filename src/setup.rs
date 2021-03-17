@@ -1,30 +1,13 @@
-use crate::Result;
-use fs::File;
-use std::env;
-use std::{fs, io::Write, path::Path};
+use crate::*;
+use std::{fs, path::Path};
 
 pub fn setup() -> Result<()> {
-    let folder = get_dotfiles_folder()?;
 
-    if !Path::new(&folder).exists() {
-        fs::create_dir(&folder)?;
-    }
+    let path = format!("{}/.config/.dotfiles", env!("HOME"));
 
-    if !Path::new(&format!("{}/dotfiles.rdfm", folder)).exists() {
-        let mut f = File::create(&format!("{}/dotfiles.rdfm", folder))?;
-        f.write_all(
-            "# This file is created by rdfm and is not intended for manual editing.\r\n".as_bytes(),
-        )?;
+    if !Path::new(&path).exists() {
+        fs::create_dir_all(&path)?;
     }
 
     Ok(())
-}
-
-pub fn get_dotfiles_folder() -> Result<String> {
-    if env::var("XDG_CONFIG_HOME").is_ok() {
-        println!("Using $XDG_CONFIG_HOME instead of $HOME/.dotfiles/ for dotfiles initialization.");
-        Ok(format!("{}/.dotfiles", env::var("XDG_CONFIG_HOME")?))
-    } else {
-        Ok(format!("{}/.dotfiles", env::var("HOME")?))
-    }
 }
