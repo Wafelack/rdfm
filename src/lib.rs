@@ -33,7 +33,7 @@ pub fn get_dotfiles_path() -> String {
 macro_rules! warn {
     ($($msg:tt),*) => {
         {
-            eprint!("[\x1b[1;33m WARN \x1b[0m]");
+            eprint!("[\x1b[1;33m WARN \x1b[0m] ");
 
             $(
                 eprint!("{}", $msg);
@@ -47,7 +47,7 @@ macro_rules! warn {
 macro_rules! ok {
     ($($msg:tt),*) => {
         {
-            eprint!("[\x1b[0;32m  OK  \x1b[0m]");
+            eprint!("[\x1b[0;32m  OK  \x1b[0m] ");
 
             $(
                 eprint!("{}", $msg);
