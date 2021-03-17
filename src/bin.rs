@@ -15,13 +15,17 @@ fn main() -> Result<()> {
                                     .about("Setups the dotfiles folder."))
                         .subcommand(SubCommand::with_name("link")
                                     .about("Links the files to the dotfiles folder."))
+                        .subcommand(SubCommand::with_name("install")
+                                    .about("Install the dotfiles to their original folders."))
                         .get_matches();
 
 
     if let Some(_) = matches.subcommand_matches("setup") {
         setup()?;
     } else if let Some(_) = matches.subcommand_matches("link") {
-        link()?;
+        link(false)?;
+    } else if let Some(_) = matches.subcommand_matches("install") {
+        link(true)?;
     }
 
     Ok(())

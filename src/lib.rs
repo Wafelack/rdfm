@@ -47,13 +47,13 @@ macro_rules! warn {
 macro_rules! ok {
     ($($msg:tt),*) => {
         {
-            eprint!("[\x1b[0;32m  OK  \x1b[0m] ");
+            print!("[\x1b[0;32m  OK  \x1b[0m] ");
 
             $(
-                eprint!("{}", $msg);
+                print!("{}", $msg);
              )*
 
-            eprintln!();
+            println!();
         }
     }
 }
