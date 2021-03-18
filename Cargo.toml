@@ -6,6 +6,7 @@ edition = "2018"
 repository = "https://github.com/wafelack/rdfm"
 documentation = "https://github.com/wafelack/rdfm/blob/master/README.md"
 license = "GPL-3.0"
+description = "A rusty dotfiles manager."
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
