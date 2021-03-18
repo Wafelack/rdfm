@@ -1,0 +1,12 @@
+#!/bin/sh
+
+KERNEL=$(uname -a | awk '{print $1}')
+
+if [[ $KERNEL == "Darwin" ]]
+then
+	rm Makefile.gnu-linux
+	mv Makefile.macOS Makefile
+else
+	rm Makefile.macOS
+	mv Makefile.gnu-linux Makefile
+fi
