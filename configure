@@ -19,7 +19,7 @@ BINARY=target/release/rdfm
 	cargo build --release
 
 install : \$(BINARY)
-	@cp \$(BINARY) /usr/$(LOCAL)/bin/
-	@chown $(GROUP):root /usr/$(LOCAL)/bin/rdfm
-	@chmod 711 /usr/$(LOCAL)/bin/rdfm
+	@cp \$(BINARY) /usr/${LOCAL}/bin/
+	@chown ${GROUP}:root /usr/${LOCAL}/bin/rdfm
+	@chmod 711 /usr/${LOCAL}/bin/rdfm
 EOF
