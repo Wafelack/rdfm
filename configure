@@ -2,11 +2,24 @@
 
 KERNEL=$(uname -a | awk '{print $1}')
 
+LOCAL=""
+GROUP="root"
+
 if [[ $KERNEL == "Darwin" ]]
 then
-	rm Makefile.gnu-linux
-	mv Makefile.macOS Makefile
-else
-	rm Makefile.macOS
-	mv Makefile.gnu-linux Makefile
+	GROUP="wheel"
+	LOCAL="local/"
 fi
+
+cat >> Makefile << EOF
+FILES=src/get_files.rs src/bin.rs src/lib.rs src/link.rs src/setup.rs
+BINARY=target/release/rdfm
+
+\$(BINARY) : \$(FILES)
+	cargo build --release
+
+install : \$(BINARY)
+	@cp \$(BINARY) /usr/$(LOCAL)/bin/
+	@chown $(GROUP):root /usr/$(LOCAL)/bin/rdfm
+	@chmod 711 /usr/$(LOCAL)/bin/rdfm
+EOF
