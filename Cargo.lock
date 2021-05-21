@@ -58,7 +58,7 @@ checksum = "538c092e5586f4cdd7dd8078c4a79220e3e168880218124dcbce860f0ea938c6"
 
 [[package]]
 name = "rdfm"
-version = "0.1.2"
+version = "0.1.3"
 dependencies = [
  "clap",
 ]

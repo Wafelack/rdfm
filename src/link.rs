@@ -1,12 +1,12 @@
 use std::{path::Path, fs};
-use crate::{get_files, Result, get_dotfiles_path, ok, warn, is_even, copy_dir};
+use crate::{get_files, Result, lib::get_dotfiles_path, ok, warn, non_fatal_error, lib::is_even, lib::copy_dir};
 
-pub fn link(reverse: bool, dry_run: bool) -> Result<()> {
-    let couples = get_files::get_files()?;
+pub fn link(reverse: bool, dry_run: bool, folder: Option<&str>) -> Result<()> {
+    let couples = get_files::get_files(folder)?;
 
     for (from, to) in couples {
 
-        let mut to = format!("{}/{}", get_dotfiles_path(), to).replace("//", "/");
+        let mut to = format!("{}/{}", get_dotfiles_path(folder), to).replace("//", "/");
         let mut from = from;
         let temp = to.clone();
         
@@ -16,7 +16,7 @@ pub fn link(reverse: bool, dry_run: bool) -> Result<()> {
         }
         
         if is_even(&from, &to)? {
-            ok!(from, " and ", to, " won't be updated.")
+            warn!(from, " and ", to, " won't be updated.")
         } else {
 
             if !dry_run {
@@ -32,7 +32,7 @@ pub fn link(reverse: bool, dry_run: bool) -> Result<()> {
             } else if Path::new(&from).is_file() {
                 if !dry_run { fs::copy(&from, &to)?; }
             } else {
-                warn!(from, " does not exist. Skipping entry.");
+                non_fatal_error!(from, " does not exist. Skipping entry.");
                 continue;
             }
 

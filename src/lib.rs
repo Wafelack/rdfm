@@ -25,29 +25,15 @@ impl std::fmt::Debug for Error {
     }
 }
 
-pub fn get_dotfiles_path() -> String {
-    format!("{}/.config/.dotfiles/", env::var("HOME").unwrap())
+pub fn get_dotfiles_path(folder: Option<&str>) -> String {
+    folder.and_then(|s| Some(s.to_string())).unwrap_or(format!("{}/.config/.dotfiles/", env::var("HOME").unwrap()))    
 }
 
 #[macro_export]
 macro_rules! warn {
     ($($msg:tt),*) => {
         {
-            eprint!("[\x1b[1;33m WARN \x1b[0m] ");
-
-            $(
-                eprint!("{}", $msg);
-             )*
-
-            eprintln!();
-        }
-    }
-}
-#[macro_export]
-macro_rules! ok {
-    ($($msg:tt),*) => {
-        {
-            print!("[\x1b[0;32m  OK  \x1b[0m] ");
+            print!("\x1b[1;33m*\x1b[0m ");
 
             $(
                 print!("{}", $msg);
@@ -57,6 +43,35 @@ macro_rules! ok {
         }
     }
 }
+#[macro_export]
+macro_rules! ok {
+    ($($msg:tt),*) => {
+        {
+            print!("\x1b[0;32m*\x1b[0m ");
+
+            $(
+                print!("{}", $msg);
+             )*
+
+            println!();
+        }
+    }
+}
+#[macro_export]
+macro_rules! non_fatal_error {
+    ($($msg:tt),*) => {
+        {
+            eprint!("\x1b[1;31m*\x1b[0m ");
+
+            $(
+                eprint!("{}", $msg);
+             )*
+
+            eprintln!();
+        }
+    }
+}
+
 
 pub fn is_even<T: AsRef<Path>, U: AsRef<Path>>(from: T, to: U) -> Result<bool> {
     if from.as_ref().is_dir() && to.as_ref().is_dir() {
@@ -150,7 +165,3 @@ pub fn copy_dir(from: &str, to: &str) -> Result<()> {
         Ok(())
     }
 }
-
-pub mod get_files;
-pub mod link;
-pub mod setup;

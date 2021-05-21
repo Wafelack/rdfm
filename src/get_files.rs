@@ -1,8 +1,8 @@
-use crate::{Result, get_dotfiles_path, error};
+use crate::{Result, warn, lib::{get_dotfiles_path, error}};
 use std::{fs, path::Path};
 
-pub fn get_files() -> Result<Vec<(String, String)>> {
-    let path = get_dotfiles_path();
+pub fn get_files(folder: Option<&str>) -> Result<Vec<(String, String)>> {
+    let path = get_dotfiles_path(folder);
 
     if !Path::new(&path).exists() {
         return Err(error("Dotfiles folder is not initialized."));
@@ -25,7 +25,6 @@ pub fn get_files() -> Result<Vec<(String, String)>> {
         let splited = line.split('=').collect::<Vec<_>>();
 
         if splited.len() != 2 {
-            eprintln!("{:?}", splited);
             warn!("Invalid syntax at line ", (idx + 1), ".");
             continue;
         }
