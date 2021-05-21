@@ -35,18 +35,3 @@ Configuration
 ```
 
 TIP: You can add comments by starting the line with a `#`.
-
-Usage
------
-
-### Setup the dotfiles environment
-
-* `rdfm setup`
-
-### Link dotfiles into the dotfiles folder
-
-* `rdfm link`
-
-### Install dotfiles from the dotfiles folder to their original location
-
-* `rdfm install`
