@@ -5,6 +5,8 @@ authors = ["Wafelack <wafelack@protonmail.com>"]
 edition = "2018"
 repository = "https://github.com/wafelack/rdfm"
 homepage = "https://github.com/wafelack/rdfm"
+keywords = ["dotfiles", "manager"]
+categories = ["command-line-utilities"]
 license = "GPL-3.0"
 description = "A rusty dotfiles manager."
 
