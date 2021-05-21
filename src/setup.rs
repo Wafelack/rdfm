@@ -1,5 +1,9 @@
-use crate::{Result, lib::get_dotfiles_path, ok};
-use std::{io::Write, fs::{self, File}, path::Path};
+use crate::{lib::get_dotfiles_path, ok, Result};
+use std::{
+    fs::{self, File},
+    io::Write,
+    path::Path,
+};
 
 pub fn setup(folder: Option<&str>) -> Result<()> {
     let path = get_dotfiles_path(folder);

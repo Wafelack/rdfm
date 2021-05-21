@@ -26,7 +26,9 @@ impl std::fmt::Debug for Error {
 }
 
 pub fn get_dotfiles_path(folder: Option<&str>) -> String {
-    folder.and_then(|s| Some(s.to_string())).unwrap_or(format!("{}/.config/.dotfiles/", env::var("HOME").unwrap()))    
+    folder
+        .and_then(|s| Some(s.to_string()))
+        .unwrap_or(format!("{}/.config/.dotfiles/", env::var("HOME").unwrap()))
 }
 
 #[macro_export]
@@ -71,7 +73,6 @@ macro_rules! non_fatal_error {
         }
     }
 }
-
 
 pub fn is_even<T: AsRef<Path>, U: AsRef<Path>>(from: T, to: U) -> Result<bool> {
     if from.as_ref().is_dir() && to.as_ref().is_dir() {
@@ -131,10 +132,11 @@ pub fn copy_dir(from: &str, to: &str) -> Result<()> {
     } else if !Path::new(from).is_dir() {
         return Err(error(format!("{} is not a directory.", from)));
     } else if Path::new(to).exists() {
-        return Err(error(format!("Cannot copy {} into {}: Destination file exists.", from, to)));
+        return Err(error(format!(
+            "Cannot copy {} into {}: Destination file exists.",
+            from, to
+        )));
     } else {
-
-        
         let current = env::current_dir()?;
         env::set_current_dir(&from)?;
         let content = readr(".")?;
@@ -150,7 +152,6 @@ pub fn copy_dir(from: &str, to: &str) -> Result<()> {
                 format!("{}/{}", from, &element)
             };
 
-
             if Path::new(&stringified).is_dir() {
                 fs::create_dir_all(&element)?;
             } else {
@@ -159,7 +160,7 @@ pub fn copy_dir(from: &str, to: &str) -> Result<()> {
                 File::create(&element)?.write_all(&buffer)?;
             }
         }
-        
+
         env::set_current_dir(&current)?;
 
         Ok(())

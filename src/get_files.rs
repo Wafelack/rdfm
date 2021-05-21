@@ -1,4 +1,7 @@
-use crate::{Result, warn, lib::{get_dotfiles_path, error}};
+use crate::{
+    lib::{error, get_dotfiles_path},
+    warn, Result,
+};
 use std::{fs, path::Path};
 
 pub fn get_files(folder: Option<&str>) -> Result<Vec<(String, String)>> {
